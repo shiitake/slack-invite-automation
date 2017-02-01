@@ -44,7 +44,9 @@
           "type": "string"
         }
     },
-    "variables": {},
+    "variables": {
+      "hostingPlanName":"[parameters('hostingPlanName')]"
+    },
     "resources": [
       {
         "apiVersion": "2014-06-01",
@@ -71,7 +73,7 @@
         ],
         "properties": {
           "name": "[parameters('siteName')]",
-          "serverFarmId": "[resourceId('Microsoft.Web/serverfarms/', parameters('WebAppSvcPlanName'))]"
+          "serverFarmId": "[concat('/subscriptions/', subscription().subscriptionId,'/resourcegroups/', resourceGroup().name, '/providers/Microsoft.Web/serverfarms/', variables('hostingPlanName'))]"
         },
         "resources": [{
           "apiVersion": "2014-04-01",
